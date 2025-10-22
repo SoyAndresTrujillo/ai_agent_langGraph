@@ -12,6 +12,11 @@ class State(TypedDict):
     """
     customer_name: str
     my_age: int
+    my_available_jobs: list[{
+      "job_title": str,
+      "salary": float
+    }]
+
 
 # Each nodo has access to the shared state
 # The principle function of the node id update and return
@@ -23,7 +28,17 @@ def node_1(state: State):
     }
   
   return {
-    "my_age": 24
+    "my_age": 24,
+    "my_available_jobs": [
+        {
+        "job_tile": "Conexis",
+        "salary": 2100.00
+        },
+        {
+          "job_tile": "Platzi",
+          "salary": 3100.00
+        }
+      ]
   }
 
 # Creation of the connection with flow of the Graph
