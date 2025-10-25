@@ -1,8 +1,9 @@
-from typing import TypedDict
-from langgraph.graph import StateGraph, START, END
+
+from langgraph.graph import MessagesState, StateGraph, START, END
+from langchain_core.messages import AIMessage
 
 # Simple memorie for all agents using pure python
-class State(TypedDict):
+class State(MessagesState):
     """
     A TypedDict representing the state structure for storing customer information.
     
@@ -26,20 +27,11 @@ def node_1(state: State):
     return {
       "customer_name": "Andres Trujillo"
     }
-  
-  return {
-    "my_age": 24,
-    "my_available_jobs": [
-        {
-        "job_tile": "Conexis",
-        "salary": 2100.00
-        },
-        {
-          "job_tile": "Platzi",
-          "salary": 3100.00
-        }
-      ]
-  }
+  else:
+    ai_message = AIMessage(content = "Hello, how can I help you today?")
+    return {
+      "messages": [ai_message]
+    }
 
 # Creation of the connection with flow of the Graph
 builder = StateGraph(State)
